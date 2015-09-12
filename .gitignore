@@ -1,0 +1,14 @@
+##for unneeded files with theory
+*.pdf
+*.xlsx
+
+
+##unneeded directories
+mice/analysisCode_firstGlimpse
+mice/analysisCode_firstGlimpse/*
+mice/hybrSchemes/hybridis.schemes/hybridisation
+mice/hybrSchemes/hybridis.schemes/hybridisation/*
+
+
+#just for now
+mice/MicroarrayQualityAssesment/*
