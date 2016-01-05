@@ -9,7 +9,7 @@
     echo '<br>Please enter your measurements, separated by either commas or spaces, e.g. in case of three samples 100.3, 150.7, 110.0 or 100.3 150.7 110.0:';
     echo '<br> <textarea name="meritve" id="numMeas" cols="60" rows="6"> </textarea><br>';
   } else {
-    //with a file
+    //from a file
     //echo 'in = '.$in.' <br>';
     echo 'File should contain a data matrix with one dimension standing for genes and the other one for samples.
           Fields have to be separated by tabs or white spaces, but not by commas. Please enter a valid path and file name:';
