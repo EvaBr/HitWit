@@ -1,0 +1,19 @@
+Calling of the program:
+
+./readDir nameOfFileToAnalyze.xls
+(for analysis of one single file)
+
+./readDir fileWithNames.txt
+(for analysis of all files, which names are written in .txt file)
+
+./readDir directory/path
+(for analysis of all files, that are in the given directory)
+
+./readDir 
+(for analysis of all files in the predefined directory)
+
+
+###################################################################
+The program reads in the name(s) of file(s) it is supposed to analyze.
+Than it opens the given files one by one and analyzes them using regular 
+expressions and library for working with .xls files.

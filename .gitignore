@@ -1,0 +1,24 @@
+##for unneeded files with theory
+*.pdf
+*.xlsx
+.Rhistory
+
+##unneeded directories
+mice/analysisCode_firstGlimpse
+mice/analysisCode_firstGlimpse/*
+mice/hybrSchemes/hybridis.schemes/hybridisation
+mice/hybrSchemes/hybridis.schemes/hybridisation/*
+mice/hybrSchemes/code/results
+mice/hybrSchemes/code/results/*
+mice/hybrSchemes/submit.work/hybridisation
+mice/hybrSchemes/submit.work/Awesome.Reading.Tool.zip
+mice/hybrSchemes/submit.work/Awesome.Reading.Tool/popravk*
+mice/hybrSchemes/submit.work/Awesome.Reading.Tool/results
+
+
+
+
+
+
+#just for now
+mice/MicroarrayQualityAssesment/*
