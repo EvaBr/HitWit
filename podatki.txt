@@ -1,0 +1,23 @@
+1. gumb, izbere string = manual/file.
+[
+ce izbere manually:
+2.a	number of genes = integer
+2.b	measurements = string (gre za stevila, locena z vejico ali presledkom.
+				npr. 10.2, 4000.3, 1.0 ali 10.2 400.3 1.0)
+]
+
+[
+ce izbere from file:
+2.a	gumb, does file contain col names. value = yes/no
+2.b	gumb, does file contain row names. value = yes/no
+2.c	gumb, do cols stand for genes or samples. value = genes/samples
+]
+
+
+3. gumb, zbira modela. string = rLN-LN, LN-LN, ali  Exp-LN.
+
+4. number of populations = integer
+
+5. number of cells in sample = integer
+
+
