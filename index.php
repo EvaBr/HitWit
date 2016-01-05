@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
+  <script type="text/javascript" src="jquery-1.11.3-jquery.min.js"></script>
 <!--  <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <script type="text/javascript"
     src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -18,7 +18,6 @@
         TeX: { extensions: ["color.js"] }});
 </script>
 <link rel="stylesheet" type="text/css" href="custom.css">
-
 
 <script>
 $(document).ready(function(){
@@ -148,6 +147,32 @@ function dataInput() {
 
 </script>
 
+<script>
+      $(function () {
+
+        $('form').on('submit', function (e) {
+
+          e.preventDefault();
+
+          if (!document.getElementById('cellspersample').value) {
+            alert('Please answer all open questions before submitting.');
+          } else {
+
+          $.ajax({
+            type: 'post',
+            url: 'writeToDb.php',
+            data: $('form').serialize(),
+            success: function (msg) {
+              alert('form was submitted');
+              $("#submit_return").html(msg); // Show data from php file.
+            }
+          });
+        };
+
+        });
+
+      });
+</script>
 
 </head>
 <body>
@@ -170,7 +195,7 @@ For more details, please visit the <a class="urls" href="stochprofdata.html">Sto
 For questions and suggestions, please contact <a class="urls" href="https://www.helmholtz-muenchen.de/icb/institute/staff/staff/ma/2448/index.html" >Christiane Fuchs.</a></p>
 
 <div class="wrapper">
-<form id ="sub" name="subm" method="post" > <!--onsubmit="return postandnext()"-->
+<form name="mainform"> <!--onsubmit="return postandnext()"-->
 <div id="accordion">
   <h3>1. Data Input</h3>
   <div>
@@ -211,7 +236,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
                                                                         Exp(\lambda), & \text{if cell is of }\color{blue} \text{type II} \end{array}\)<br>
                   <img src="lnln.png" height="200" width="200" value="LN-LN"/></td></tr>
           </table>
-          <input type="radio" name="model" id="lnln">
+          <input type="radio" name="model" value="lnln" id="lnln">
         </label>
 
         <label for="rlnln">
@@ -223,7 +248,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
 
                   <img src="rlnln.png" height="200" width="200" value="rLN-LN"/></td></tr>
           </table>
-          <input type="radio" name="model" id="rlnln">
+          <input type="radio" name="model" id="rlnln" value="rlnln">
         </label>
 
         <label for="expln">
@@ -234,7 +259,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
                                                                       Exp(\lambda), & \text{if cell is of }\color{blue} \text{type II} \end{array}\)<br>
                   <img src="expln.png" height="200" width="200" value="Exp-LN" /></td></tr>
           </table>
-          <input type="radio" name="model" id="expln">
+          <input type="radio" name="model" id="expln" value="expln">
         </label>
     </div> <br>
     <button type="button" id="next2" style="float: right;"> Next </button>
@@ -245,7 +270,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
 <div>
   <p>
     Please enter the number of different populations you would like to estimate:
-    <br> <input type="number" name="populations" min="1" id="populations"> <br><br>
+    <br> <input type="number" name="populations" min="1" id="populations" > <br><br>
     <button type="button" id="next3" style="float: right;"> Next </button>
     <button type="button" id="prev3" style="float: right;"> Previous </button><br>
   </p>
@@ -255,7 +280,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
   <p>
     Please enter the number of cells that entered each sample:
     <br> <input type="text" name="cellspersample" id="cellspersample"> <br><br>
-    <input type="submit" id="final" style="float: right;" value="Submit">
+    <input type="submit" name="main_submit" style="float: right;" value="Submit">
     <button type="button" id="prev4" style="float: right;"> Previous </button>
     <br>
   </p>
@@ -264,5 +289,6 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
 </form>
 </div>
 <br><br><br>
+<div id="submit_return"> </div> <br>
 </body>
 </html>
