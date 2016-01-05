@@ -47,11 +47,17 @@ $(document).ready(function(){
   //function nextSection(), onclick za gumb next
   $("#next1, #next2, #next3").click(function(){
     var index = $("#accordion").accordion('option','active');
-    index++;
+    var cannotContinue = checkFirst(index);
 
-    $( $( "#accordion > h3" )[index] ).removeClass( "ui-state-disabled" );
-    $("#accordion").accordion("option", "active", index);
-    $( $( "#accordion > h3" )[index-1] ).addClass( "ui-state-disabled" );
+    if (cannotContinue) {
+      alert("Please answer all open questions before continuing!");
+    } else {
+      index++;
+
+      $( $( "#accordion > h3" )[index] ).removeClass( "ui-state-disabled" );
+      $("#accordion").accordion("option", "active", index);
+      $( $( "#accordion > h3" )[index-1] ).addClass( "ui-state-disabled" );
+    }
   });
 
 
@@ -75,6 +81,42 @@ $(document).ready(function(){
 //  });
 });
 
+function checkFirst(kder){ //returns true, if some data is missing. in that case, user is to be alerted.
+  //document.getElementById('id').value;
+  var result = 0;
+  switch(kder) {
+    case 0:
+      var wayofinp = $("input[name=inp]:checked").val();
+      if (wayofinp == "manual") {
+        //var numGenes = document.getElementById('numGen').value;
+        //var measures = document.getElementById('numMeas').value;
+        result = (document.getElementById('numGen').value && document.getElementById('numMeas').value);   //(!(numGenes && measures));
+      } else if (wayofinp == "file") {
+        var filepath = document.getElementById('path').value;
+        var colNames = $("input[name=colNam]:checked").val();
+        var rowNames = $("input[name=rowNam]:checked").val();
+        var genOrSam = $("input[name=genVsam]:checked").val();
+        result = filepath && colNames && rowNames && genOrSam;
+      } /*else {
+        result = 0;
+      }*/
+      break;
+    case 1:
+      result = $("input[name=model]:checked").val();
+      break;
+    case 2:
+      result = document.getElementById('populations').value;
+      break;
+    /*case 3:    THIS IS FOR THE SUBMIT BUTTON! AND THUS DONE IN ONSUBMISSION();
+      result = document.getElementById('cellspersample').value;
+      break;*/
+    default:
+      break;
+  };
+  return (!result);
+};
+
+
 function dataInput() {
 //      $.post('file.php',{ indata: $('input:radio[name='input']:checked').val() }, function() {
 //          $("#podatki").php();
@@ -96,7 +138,6 @@ function dataInput() {
           alert( "Request failed: " + textStatus );
         });
 };
-
 
 //  function postandnext() {
     //post-ano je ze, preveri da je vse in potegni dol ter shrani v bazo. daj alert da bodo rezultati programa poslani na mail (al kaj?).
@@ -148,10 +189,10 @@ global single-cell techniques. <br>
 
 This webtool allows you to generate synthetic data from our stochastic profiling models
 as well as analyze your own data files. It serves as an interface to the R package
-<em>stochprofML</em>.
+<em><a class="urls" href="https://cran.r-project.org/web/packages/stochprofML/index.html">stochprofML</a></em>.
 
-For more details, please visit the <a href="index_stochprof.php">Stochastic Profiling Webpage</a>.
-For questions and suggestions, please contact Christiane Fuchs (link my email here, but has to be encrypted, otherwise link to my webpage).</p>
+For more details, please visit the <a class="urls" href="stochprofdata.html">Stochastic Profiling Webpage</a>.
+For questions and suggestions, please contact <a class="urls" href="https://www.helmholtz-muenchen.de/icb/institute/staff/staff/ma/2448/index.html" >Christiane Fuchs.</a></p>
 
 <div class="wrapper">
 <form name="mainform"> <!--onsubmit="return postandnext()"-->
