@@ -32,6 +32,7 @@
     margin-top: 1.7em;
     width: 70%;
     font-size: smaller;
+    /*color: #555555;*/
 }
 #accordion .ui-accordion-header {
     font-weight: bolder;
@@ -43,8 +44,28 @@ body {
   font-weight: lighter;
   color: #555555;
   text-align: justify;
+
 }
 p.uvod{
   font-family: "Times New Roman";
-  font-weight: 
+  font-size: 12pt;
+  font-style: italic;
+  margin-left: 2.1em;
+  width: 64%;
+  color: #555555;
+  text-align: justify;
+}
+a.urls{
+  font-style: normal;
+  font-weight: 200;
+  color: #555555;
+  font-size: normal;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #555555;
+}
+
+textarea{
+  resize: none;
+  overflow-y: scroll;
 }
