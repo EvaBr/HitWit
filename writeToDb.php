@@ -4,11 +4,11 @@ echo $_POST['model'];
 
 // Is the final submit button pressed?
 if ($_POST) {
-  
+
   // Prepare data.
-  $measurements_sql = mysql_real_escape_string($_POST['samples']);
+  $measurements_sql = mysql_real_escape_string($_POST['meritve']);
   $model_sql = mysql_real_escape_string($_POST['model']);
-  $genes_sql = $_POST['genes'];
+  $genes_sql = $_POST['geni'];
   $populations_sql = $_POST['populations'];
   $cellspersample_sql = $_POST['cellspersample'];
 
