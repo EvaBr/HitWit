@@ -49,9 +49,9 @@ $(document).ready(function(){
     var index = $("#accordion").accordion('option','active');
     var cannotContinue = checkFirst(index);
 
-    if (cannotContinue) {
+    if (cannotContinue && index != 0) {
       alert("Please answer all open questions before continuing!");
-    } else {
+    } else if (!cannotContinue) {
       index++;
 
       $( $( "#accordion > h3" )[index] ).removeClass( "ui-state-disabled" );
@@ -59,6 +59,9 @@ $(document).ready(function(){
       $( $( "#accordion > h3" )[index-1] ).addClass( "ui-state-disabled" );
     }
   });
+
+  // By clicking Next 2 button, send the textarea to checkStrings.php
+//  $("#next1").click(function(){ // When you click on button #next1...
 
 
   //function prevSection(), onclick za gumb previous
@@ -90,7 +93,29 @@ function checkFirst(kder){ //returns true, if some data is missing. in that case
       if (wayofinp == "manual") {
         //var numGenes = document.getElementById('numGen').value;
         //var measures = document.getElementById('numMeas').value;
-        result = (document.getElementById('numGen').value && document.getElementById('numMeas').value);   //(!(numGenes && measures));
+        var meritve = document.getElementById('numMeas').value; // capture the #meritve textfield
+        result = (document.getElementById('numGen').value && meritve);   //(!(numGenes && measures));
+
+        if (!result){
+          alert("Please answer all open questions before continuing!");
+        } else {
+          $.ajax({ /* And send the info var to checkstrings.php */
+              type: "POST",
+              url: 'checkStrings.php',
+              async: false,
+              data: {meritve: meritve},
+              success: function (msg) {
+                  // Show data from php file.
+                  var result_ajax = JSON.parse(msg);
+                  //$("#submit_return").html(result_ajax);
+                  if (result_ajax == 0){
+                    alert("You did not follow the suggested pattern for measurements or you have entered a non-numeric character. Please correct that and resubmit.");
+                    result = 0;
+                    $("#submit_return").html(result);
+                  }
+              }
+            });
+        }
       } else if (wayofinp == "file") {
         var filepath = document.getElementById('path').value;
         var colNames = $("input[name=colNam]:checked").val();
@@ -147,6 +172,7 @@ function dataInput() {
 
 </script>
 
+<!-- FINAL SUBMIT button -->
 <script>
       $(function () {
 
@@ -164,7 +190,10 @@ function dataInput() {
             data: $('form').serialize(),
             success: function (msg) {
               alert('form was submitted');
-              $("#submit_return").html(msg); // Show data from php file.
+              $( "form" ).fadeOut( "slow", function(){
+                $("#submit_return").html(msg); // Show data from php file.
+                $("#helmholtz_logo").fadeIn();
+              });
             }
           });
         };
@@ -193,7 +222,7 @@ as well as analyze your own data files. It serves as an interface to the R packa
 
 For more details, please visit the <a class="urls" href="stochprofdata.html">Stochastic Profiling Webpage</a>.
 For questions and suggestions, please contact <a class="urls" href="https://www.helmholtz-muenchen.de/icb/institute/staff/staff/ma/2448/index.html" >Christiane Fuchs.</a></p>
-
+<div name="hula" value="1" />
 <div class="wrapper">
 <form name="mainform"> <!--onsubmit="return postandnext()"-->
 <div id="accordion">
@@ -289,6 +318,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
 </form>
 </div>
 <br><br><br>
-<div id="submit_return"> </div> <br>
+<div style="display: none;"id="helmholtz_logo"><img src="helmholtz_logo.png"></div>
+<div id="submit_return"></div>
 </body>
 </html>
