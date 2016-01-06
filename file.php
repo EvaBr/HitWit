@@ -7,7 +7,7 @@
     echo 'Please enter the number of genes your dataset contains measurements for: ';
     echo '<br> <input type="number" min="1" name="geni" id="numGen"> <br>';
     echo '<br>Please enter your measurements, separated by either commas or spaces, e.g. in case of three samples 100.3, 150.7, 110.0 or 100.3 150.7 110.0:';
-    echo '<br> <textarea name="meritve" id="numMeas" cols="60" rows="6"> </textarea><br>';
+    echo '<br> <textarea name="meritve" id="numMeas" cols="60" rows="6"></textarea><br>';
   } else {
     //with a file
     //echo 'in = '.$in.' <br>';
