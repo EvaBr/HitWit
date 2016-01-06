@@ -3,7 +3,7 @@
 
   if ($model=="expln") {
     echo 'Please enter the rate of the exponential distribution for the exponential population:<br>';
-    echo '<input type="number" step="0.001" in="rate" name="rate" >';
+    echo '<input type="number" step="0.001" id="rate" name="rate" >';
   }
 
  ?>

@@ -58,10 +58,14 @@ $(document).ready(function(){
       alert("Please answer all open questions correctly before continuing!");
     } else {
       index++;
+      if (index==2) {
+        popProperties();
+      }
 
       $( $( "#accordion > h3" )[index] ).removeClass( "ui-state-disabled" );
       $("#accordion").accordion("option", "active", index);
       $( $( "#accordion > h3" )[index-1] ).addClass( "ui-state-disabled" );
+
     }
   });
 
@@ -70,7 +74,9 @@ $(document).ready(function(){
   $("#prev2, #prev3, #prev4, #prev5, #prev6, #prev7, #prev8, #prev9, #prev10").on('click',function(){
     var index = $("#accordion").accordion('option', 'active');
     index--;
-
+    if (index==1) {
+      alert("If you return to the previous section, current progress might be lost!");
+    }
     $( $( "#accordion > h3" )[index] ).removeClass( "ui-state-disabled" );
     $("#accordion").accordion("option", "active", index);
     $( $( "#accordion > h3" )[index+1] ).addClass( "ui-state-disabled" );
@@ -95,22 +101,48 @@ function checkFirst(kder){ //returns true, if some data is missing. in that case
     case 4:
       result = document.getElementById('cluster').value;
       break;
-    case 20:
-      var wayofinp = $("input[name=inp]:checked").val();
-      if (wayofinp == "manual") {
-        //var numGenes = document.getElementById('numGen').value;
-        //var measures = document.getElementById('numMeas').value;
-        result = (document.getElementById('numGen').value && document.getElementById('numMeas').value);   //(!(numGenes && measures));
-      } else if (wayofinp == "file") {
-        var filepath = document.getElementById('path').value;
-        var colNames = $("input[name=colNam]:checked").val();
-        var rowNames = $("input[name=rowNam]:checked").val();
-        var genOrSam = $("input[name=genVsam]:checked").val();
-        result = filepath && colNames && rowNames && genOrSam;
-      } /*else {
-        result = 0;
-      }*/
+    case 5:
+      var popz = document.getElementById('populations').value;
+      var count = 0;
+      var sum = 0;
+      while (count<popz) {
+        result = result && $( "input[name='popProb"+count+"']" ).val();
+        sum = sum + Number($( "input[name='popProb"+count+"']" ).val());
+        count++;
+      }
+      // alert("sum= "+sum+"");
+      result = result && (Math.abs(sum-1)<0.001);
       break;
+    case 6:
+      var mudel = $("input[name=model]:checked").val();
+      if (mudel=="expln" && !document.getElementById('rate').value) {
+        result = 0;
+      } else {
+        var popz = document.getElementById('populations').value - (mudel=="expln");
+        var count = 0;
+        while (count<popz) {
+          result = result && $( "input[name='logMean"+count+"']" ).val();
+          count++;
+        }
+      }
+      break;
+    case 7:
+      var mudel = $("input[name=model]:checked").val();
+      var popz = (mudel!="lnln")*(document.getElementById('populations').value - (mudel=="expln") - 1) + 1;
+      var count = 0;
+      while (count<popz) {
+        result = result && $( "input[name='stdDev"+count+"']" ).val();
+        count++;
+      }
+      break;
+/*    case 8:  //This happens ONSUBMIT!!!! So it should be done in that function.
+      var wayofout = $("input[name='filename']:checked").val();
+      if (wayofout == "yes") {
+        result = document.getElementById('filename').value;
+      } else if (wayofout!="no") {
+        result = 0;
+      }
+      break; */
     default:
       break;
   };
@@ -152,7 +184,7 @@ function populationRate() {
         });
   };
 
-  function popProperties() {
+  function popProperties(whichone) {
         var requestStd = $.ajax({
           url: 'getprops.php',
           type: "POST",
@@ -231,7 +263,7 @@ function populationRate() {
         <label for="lnln">
           <table>
             <tr><td> LN-LN </td></tr>
-            <tr><td class="modelbox"> \(\definecolor{yellow}{RGB}{255, 255, 0} \definecolor{blue}{RGB}{0, 0, 255}
+            <tr><td class="modelbox"> \(\definecolor{yellow}{RGB}{255, 210, 0} \definecolor{blue}{RGB}{0, 0, 255}
                                       X \sim \begin{array}{ll} LN(\mu_1, \sigma^2), & \text{if cell is of }\color{yellow} \text{type I} \\
                                                                         Exp(\lambda), & \text{if cell is of }\color{blue} \text{type II} \end{array}\)<br>
                   <img src="lnln.png" height="200" width="200" value="LN-LN"/></td></tr>
@@ -242,7 +274,7 @@ function populationRate() {
         <label for="rlnln">
           <table>
             <tr><td> rLN-LN </td></tr>
-            <tr><td class="modelbox">\(\definecolor{yellow}{RGB}{255, 255, 0} \definecolor{blue}{RGB}{0, 0, 255}
+            <tr><td class="modelbox">\(\definecolor{yellow}{RGB}{255, 210, 0} \definecolor{blue}{RGB}{0, 0, 255}
                                       X \sim \begin{array}{ll} LN(\mu_1, \sigma_1^2), & \text{if cell is of }\color{yellow} \text{type I} \\
                                                                  LN(\mu_2, \sigma_2^2), & \text{if cell is of }\color{blue} \text{type II} \end{array}\)<br>
 
@@ -254,7 +286,7 @@ function populationRate() {
         <label for="expln">
           <table>
             <tr><td> Exp-LN </td></tr>
-            <tr><td class="modelbox">\(\definecolor{yellow}{RGB}{255, 255, 0} \definecolor{blue}{RGB}{0, 0, 255}
+            <tr><td class="modelbox">\(\definecolor{yellow}{RGB}{255, 210, 0} \definecolor{blue}{RGB}{0, 0, 255}
                                       X \sim \begin{array}{ll} LN(\mu, \sigma^2), & \text{if cell is of }\color{yellow} \text{type I} \\
                                                                       Exp(\lambda), & \text{if cell is of }\color{blue} \text{type II} \end{array}\)<br>
                   <img src="expln.png" height="200" width="200" value="Exp-LN" /></td></tr>
@@ -326,7 +358,7 @@ function populationRate() {
 <h3>8. Log-Standard Deviations</h3>
 <div>
   <p>
-    Please enter the log-standard deviations for each population:
+    Please enter the log-standard deviation for each population:
     <br><div id="popStddev"> </div> <br><br>
     <button type="button" id="next8" style="float: right;"> Next </button>
     <button type="button" id="prev8" style="float: right;"> Previous </button><br>
