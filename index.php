@@ -122,9 +122,11 @@ function checkFirst(kder){ //returns true, if some data is missing. in that case
         var rowNames = $("input[name=rowNam]:checked").val();
         var genOrSam = $("input[name=genVsam]:checked").val();
         result = filepath && colNames && rowNames && genOrSam;
-      } /*else {
-        result = 0;
-      }*/
+        if (!result) {  alert("Please answer all open questions before continuing!"); }
+      } else {
+        alert("Please answer all open questions before continuing!");
+        //result = 0;
+      }
       break;
     case 1:
       result = $("input[name=model]:checked").val();
