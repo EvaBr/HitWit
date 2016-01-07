@@ -262,7 +262,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
         <label for="lnln">
           <table>
             <tr><td> LN-LN </td></tr>
-            <tr><td class="modelbox"> \(\definecolor{yellow}{RGB}{255, 255, 0} \definecolor{blue}{RGB}{0, 0, 255}
+            <tr><td class="modelbox"> \(\definecolor{yellow}{RGB}{255, 210, 0} \definecolor{blue}{RGB}{0, 0, 255}
                                       X \sim \begin{array}{ll} LN(\mu_1, \sigma^2), & \text{if cell is of }\color{yellow} \text{type I} \\
                                                                         Exp(\lambda), & \text{if cell is of }\color{blue} \text{type II} \end{array}\)<br>
                   <img src="lnln.png" height="200" width="200" value="LN-LN"/></td></tr>
@@ -273,7 +273,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
         <label for="rlnln">
           <table>
             <tr><td> rLN-LN </td></tr>
-            <tr><td class="modelbox">\(\definecolor{yellow}{RGB}{255, 255, 0} \definecolor{blue}{RGB}{0, 0, 255}
+            <tr><td class="modelbox">\(\definecolor{yellow}{RGB}{255, 210, 0} \definecolor{blue}{RGB}{0, 0, 255}
                                       X \sim \begin{array}{ll} LN(\mu_1, \sigma_1^2), & \text{if cell is of }\color{yellow} \text{type I} \\
                                                                  LN(\mu_2, \sigma_2^2), & \text{if cell is of }\color{blue} \text{type II} \end{array}\)<br>
 
@@ -285,7 +285,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
         <label for="expln">
           <table>
             <tr><td> Exp-LN </td></tr>
-            <tr><td class="modelbox">\(\definecolor{yellow}{RGB}{255, 255, 0} \definecolor{blue}{RGB}{0, 0, 255}
+            <tr><td class="modelbox">\(\definecolor{yellow}{RGB}{255, 210, 0} \definecolor{blue}{RGB}{0, 0, 255}
                                       X \sim \begin{array}{ll} LN(\mu, \sigma^2), & \text{if cell is of }\color{yellow} \text{type I} \\
                                                                       Exp(\lambda), & \text{if cell is of }\color{blue} \text{type II} \end{array}\)<br>
                   <img src="expln.png" height="200" width="200" value="Exp-LN" /></td></tr>
