@@ -1,3 +1,7 @@
+html{
+  overflow-y:scroll;
+  resize: vertical;
+}
 /* center radio below label */
 .iradioModel label{
     display:inline-block;
