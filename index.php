@@ -43,7 +43,6 @@ $(document).ready(function(){
     $( "#radio" ).buttonset();
   });
 
-
   //function nextSection(), onclick za gumb next
   $("#next1, #next2, #next3").click(function(){
     var index = $("#accordion").accordion('option','active');
@@ -122,6 +121,11 @@ function checkFirst(kder){ //returns true, if some data is missing. in that case
         var rowNames = $("input[name=rowNam]:checked").val();
         var genOrSam = $("input[name=genVsam]:checked").val();
         result = filepath && colNames && rowNames && genOrSam;
+
+        if (!result){
+          alert("Please answer all open questions before continuing!");
+        }
+
       } /*else {
         result = 0;
       }*/

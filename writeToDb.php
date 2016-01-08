@@ -11,6 +11,7 @@ function checkStrings($string) {
 }
 
 include_once 'db_connect.php'; // Setup the connection, including database call.
+echo $_POST['path'];
 
 // Is the final submit button pressed?
 if ($_POST) {
