@@ -312,7 +312,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
 <div>
   <p>
     Please enter the number of cells that entered each sample:
-    <br> <input type="text" name="cellspersample" id="cellspersample"> <br><br>
+    <br> <input type="number" min="1" name="cellspersample" id="cellspersample"> <br><br>
     <input type="submit" name="main_submit" style="float: right;" value="Submit">
     <button type="button" id="prev4" style="float: right;"> Previous </button>
     <br>
