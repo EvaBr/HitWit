@@ -126,9 +126,10 @@ function checkFirst(kder){ //returns true, if some data is missing. in that case
           alert("Please answer all open questions before continuing!");
         }
 
-      } /*else {
+      } else {
         result = 0;
-      }*/
+        alert("Please choose means of data input!");
+      }
       break;
     case 1:
       result = $("input[name=model]:checked").val();
