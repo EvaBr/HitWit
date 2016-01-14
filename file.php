@@ -53,9 +53,9 @@ function onUploadClick(event) {
   } else {
     //with a file
     //echo 'in = '.$in.' <br>';
-    echo 'File should be of txt format and contain a data matrix with one dimension standing for genes and the other one for samples.
-          Fields have to be separated by tabs or white spaces, but not by commas. Please upload the file:';
-    echo '<br> <input type="file" id="path"> <button type="button" id="fileSubmit" style="float: right;" onClick="onUploadClick();">Upload</button><br>';
+    echo 'File should be of txt format and at most 5Mb big, containing a data matrix with one dimension standing for genes and the other one for samples.
+          Fields have to be separated by tabs or white spaces, but not by commas. Please choose the file to upload:';
+    echo '<br> <input type="file" id="path"> <button type="button" id="fileSubmit" style="float: center;" onClick="onUploadClick();">Upload</button><br>';
     echo '<br>
           Does the file contain column names?<br>
                 <div class="iradio">
