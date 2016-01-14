@@ -342,7 +342,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
 </form>
 </div>
 <br><br><br>
-<div style="display: none;"id="helmholtz_logo"><img src="helmholtz_logo.png"></div>
+<div style="display: none; margin-left: 2.5em; width: 67%;" id="helmholtz_logo"><img src="helmholtz_logo.png"></div>
 <div id="submit_return"></div>
 </body>
 </html>
