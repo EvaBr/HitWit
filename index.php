@@ -169,6 +169,10 @@ function dataInput() {
         });
 };
 
+function uploadFile(){
+  
+};
+
 //  function postandnext() {
     //post-ano je ze, preveri da je vse in potegni dol ter shrani v bazo. daj alert da bodo rezultati programa poslani na mail (al kaj?).
 //    alert('Program is now running on submitted data. When finished, the results will be sent to your email.');

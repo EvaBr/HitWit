@@ -11,9 +11,10 @@
   } else {
     //with a file
     //echo 'in = '.$in.' <br>';
-    echo 'File should contain a data matrix with one dimension standing for genes and the other one for samples.
-          Fields have to be separated by tabs or white spaces, but not by commas. Please enter a valid path and file name:';
-    echo '<br> <input type="text" name="path" id="path"> <br>';
+    echo 'File should be of txt format and contain a data matrix with one dimension standing for genes and the other one for samples.
+          Fields have to be separated by tabs or white spaces, but not by commas. Please upload the file:';
+    echo '<br> <div id="inpfile"><input type="file" name="path" id="path"> <br>
+                <button type=button id="uploadfile" style="float: right;" onclick="uploadFile()">Upload</button></div> <br>';
     echo '<br>
           Does the file contain column names?<br>
                 <div class="iradio">
