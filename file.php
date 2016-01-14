@@ -3,22 +3,29 @@
 <script>
 function onUploadClick(event) {
     //var file_data = event.target.files;
-    //alert("hulala");
+    alert("hulala");
     //var file_data = document.getElementById('path').value;
     var file_data = $('#path').prop('files')[0];
     var form_data = new FormData();
     form_data.append('file', file_data);
-    //alert(form_data);
+    alert(form_data);
           $.ajax({
             type: 'post',
             url: 'uploadFile.php',
-            dataType: 'text',  // what to expect back from the PHP script, if anything
+            dataType: 'json',  // what to expect back from the PHP script, if anything
             cache: false,
             contentType: false,
             processData: false,
             data: form_data,
             success: function (msg) {
-              alert(msg);
+              var upload_result = JSON.parse(msg);
+              switch (upload_result){
+                case 01: alert("The file extension is not .txt."); break;
+                case 10: alert("The file is bigger than 5 mb."); break;
+                case 00: alert("We couldn't upload the file."); break;
+                default: document.getElementById('filename_sql').value = upload_result; $("#success").fadeIn();
+              };
+
             }
               });
     /*$.ajax({
@@ -55,26 +62,27 @@ function onUploadClick(event) {
     //echo 'in = '.$in.' <br>';
     echo 'File should be of txt format and contain a data matrix with one dimension standing for genes and the other one for samples.
           Fields have to be separated by tabs or white spaces, but not by commas. Please upload the file:';
-    echo '<br> <input type="file" id="path"> <button type="button" id="fileSubmit" style="float: right;" onClick="onUploadClick();">Upload</button><br>';
+    echo '<br> <input type="file" id="path"> <button type="button" id="fileSubmit" style="float: right;" onClick="onUploadClick();">Upload</button>
+    <div id="success" style="display: none;"><img style="width: 32px" src="success.png"></div><br>';
     echo '<br>
           Does the file contain column names?<br>
                 <div class="iradio">
-                  <input type="radio" name="colNam" id="colNamY"><label for="colNamY"> Yes </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  <input type="radio" name="colNam" id="colNamN"><label for="colNamN"> No </label>
+                  <input type="radio" name="colNam" id="colNamY" value="yes"><label for="colNamY"> Yes </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  <input type="radio" name="colNam" id="colNamN" value="no"><label for="colNamN"> No </label>
                 </div><br>
 
           <br>
           Does the file contain row names?
                 <div class="iradio">
-                  <input type="radio" name="rowNam" id="rowNamY"><label for="rowNamY"> Yes </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  <input type="radio" name="rowNam" id="rowNamN"><label for="rowNamN"> No </label>
+                  <input type="radio" name="rowNam" id="rowNamY" value="yes"><label for="rowNamY"> Yes </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  <input type="radio" name="rowNam" id="rowNamN" value="no"><label for="rowNamN"> No </label>
                 </div><br>
 
           <br>
           Do the columns stand for different genes or different samples?</li>
                 <div class="iradio">
-                  <input type="radio" name="genVsam" id="genes"><label for="genes"> Genes </label> <br>
-                  <input type="radio" name="genVsam" id="samples"><label for="samples"> Samples </label>
+                  <input type="radio" name="genVsam" id="genes" value="genes"><label for="genes"> Genes </label> <br>
+                  <input type="radio" name="genVsam" id="samples" value="samples"><label for="samples"> Samples </label>
                 </div>';
   }
   ?>

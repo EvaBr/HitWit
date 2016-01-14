@@ -1,30 +1,20 @@
 <?php
-echo $_POST['file'];
-if (isset($_FILES['file'])) echo 'haba';
-move_uploaded_file(
 
-    // this is where the file is temporarily stored on the server when uploaded
-    // do not change this
-    $_FILES['file']['tmp_name'],
+$upload_dir = "file_uploads/";
 
-    // this is where you want to put the file and what you want to name it
-    // in this case we are putting in a directory called "uploads"
-    // and giving it the original filename
-    'file_uploads/' . $_FILES['file']['name']
-);
+$sourcePath = $_FILES['file']['tmp_name'];
+$extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-/*$upload_dir = "file_uploads/";
+if ($extension != "txt") { echo json_encode(01); die(""); }
+if ($_FILES["file"]["size"] > 5000000) { echo json_encode(10); die(""); }
 
-$sourcePath = basename($_FILES['filepath']['name']);
-$extension = pathinfo($sourcePath, PATHINFO_EXTENSION);
-echo $sourcePath;
-echo $extension;
 
-if ($extension != "csv" || $extension != "txt") die("The file extension is not .csv or .txt.");
-if ($_FILES["filepath"]["size"] > 5000000) die("The file is bigger than 5 mb.");
+$file_id = rand(0, 1000); // generate a random file id
+$file_randName = $file_id . "_" . $_FILES['file']['name'];
+$targetPath = $upload_dir . $file_randName; // Target path where file is to be stored
 
-echo 'haha';*/
-//$targetPath = .$upload_dir.$_FILES['file']['name']; // Target path where file is to be stored
-//move_uploaded_file($sourcePath,$targetPath) ;
+
+if(move_uploaded_file($sourcePath,$targetPath)) echo json_encode($file_id); // Success.
+else echo json_encode(00); //
 
 ?>

@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
+
 function checkStrings($string) {
   $explodeAndCheck = array_filter(explode(', ', $string), 'is_numeric'); // explode on ", " and only take the values which are numeric
   $finalParse = array_map('floatval', $explodeAndCheck); // convert from char to float
@@ -11,30 +14,46 @@ function checkStrings($string) {
 }
 
 include_once 'db_connect.php'; // Setup the connection, including database call.
-echo $_POST['path'];
 
-// Is the final submit button pressed?
-if ($_POST) {
+  //if (!$_POST) die("You did not enter any form!");
 
-  // Prepare data.
-  $measurements_sql = mysql_real_escape_string($_POST['meritve']);
-  $model_sql = mysql_real_escape_string($_POST['model']);
-  $genes_sql = $_POST['geni'];
+  // Prepare basic data.
   $populations_sql = $_POST['populations'];
   $cellspersample_sql = $_POST['cellspersample'];
+  $model_sql = mysql_real_escape_string($_POST['model']);
+  $email_sql = $_POST['email'];
+
+// Is the final submit button pressed?
+if ($_POST['indata'] == "manual") {
+
+  // Prepare additional data.
+  $measurements_sql = mysql_real_escape_string($_POST['meritve']);
+  $genes_sql = $_POST['geni'];
+
 
   // Check if data is written correctly.
   if(checkStrings($measurements_sql) === 1) {
 
-    $sql = mysql_query("INSERT INTO data (genes, measurements, model, populations, sampleCells) VALUES ($genes_sql, '$measurements_sql', '$model_sql', $populations_sql, $cellspersample_sql)");
+    $sql = mysql_query("INSERT INTO data (genes, measurements, model, populations, sampleCells, email) VALUES ($genes_sql, '$measurements_sql', '$model_sql', $populations_sql, $cellspersample_sql, '$email_sql')");
     if (!$sql) die('Could not enter data. ' . mysql_error());
 
     echo 'Data was successfully written to our database. Thank you for your contribution.';
   } else {
     echo 'An error occured. Please check whether you entered the data correctly and resubmit the form.';
   };
+
 } else {
-  echo 'There was no form submitted.';
+
+   // Prepare additional data.
+    $file_ColNames = $_POST['colNam'];
+    $file_RowNames = $_POST['rowNam'];
+    $file_ColSort = $_POST['genVsam'];
+    $file_name = $_POST['filename_sql'] . "_" . $_POST['path'];
+
+    $sql = mysql_query("INSERT INTO data (file_ColNames, file_RowNames, file_ColSort, file_name, model, populations, sampleCells, email) VALUES ('$file_ColNames', '$file_RowNames', '$file_ColSort', '$file_name', '$model_sql',  $populations_sql, $cellspersample_sql, '$email_sql')");
+    if (!$sql) die('Could not enter data. ' . mysql_error());
+
+    echo 'Data was successfully written to our database. Thank you for your contribution.';
 }
 
 mysql_close($link); // Close the SQL connection.

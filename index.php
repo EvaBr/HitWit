@@ -192,10 +192,23 @@ function dataInput() {
             alert('Please answer all open questions before submitting.');
           } else {
 
+          // Prepare additional data to be sent.
+          var indata = $('input:radio[name="inp"]:checked').val();
+          if ($('input:radio[name="inp"]:checked').val() == 'file'){ // Only add these vars if you use file method.
+            var filename_sql = document.getElementById('filename_sql').value;
+            var path = document.getElementById('path').value;
+          }
+
+          // Append additional data to be sent.
+          var formData = $('form').serializeArray();
+          formData.push({ name: 'filename_sql', value: filename_sql });
+          formData.push({ name: 'path', value: path })
+          formData.push({ name: 'indata', value: indata })
+
           $.ajax({
             type: 'post',
             url: 'writeToDb.php',
-            data: $('form').serialize(),
+            data: formData,
             success: function (msg) {
               alert('form was submitted');
               $( "form" ).fadeOut( "slow", function(){
@@ -317,12 +330,15 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
   <p>
     Please enter the number of cells that entered each sample:
     <br> <input type="number" min="1" name="cellspersample" id="cellspersample"> <br><br>
+    Please enter your e-mail address:
+    <br> <input type="email" id="email" name="email"><br><br>
     <input type="submit" name="main_submit" style="float: right;" value="Submit">
     <button type="button" id="prev4" style="float: right;"> Previous </button>
     <br>
   </p>
 </div>
 </div>
+<!-- File's unique ID to write to SQL --> <div id="filename_sql" name="filename_sql" style="display: none;"></div>
 </form>
 </div>
 <br><br><br>
