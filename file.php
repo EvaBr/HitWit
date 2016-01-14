@@ -1,3 +1,44 @@
+<html>
+<head>
+<script>
+function onUploadClick() {
+    alert("hulala");
+    var file_data = document.getElementById('path').value;
+    //var file_data = $('#path').prop('files')[0];
+    var form_data = new FormData();
+    form_data.append('file', file_data);
+    alert(form_data);
+          $.ajax({
+            type: 'post',
+            url: 'uploadFile.php',
+            dataType: 'text',  // what to expect back from the PHP script, if anything
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            success: function (msg) {
+              alert(msg);
+            }
+              });
+    /*$.ajax({
+                url: 'uploadFile.php', // point to server-side PHP script
+                dataType: 'html',  // what to expect back from the PHP script, if anything
+                //cache: false,
+                //contentType: false,
+                //processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(php_script_response){
+                    alert("haha");
+                    alert(php_script_response); // display response from the PHP script, if any
+                }
+     });*/
+}
+</script>
+</head>
+<body></body>
+</html>
+
 <?php
   $in = $_POST['indata'];
 
@@ -14,7 +55,10 @@
     echo 'File should be of txt format and contain a data matrix with one dimension standing for genes and the other one for samples.
           Fields have to be separated by tabs or white spaces, but not by commas. Please upload the file:';
     echo '<br> <div id="inpfile"><input type="file" name="path" id="path"> <br>
-                <button type=button id="uploadfile" style="float: right;" onclick="uploadFile()">Upload</button></div> <br>';
+                <button type=button id="uploadfile"  onclick="uploadFile()">Upload</button></div> <br>';
+    echo 'File should be of txt format and contain a data matrix with one dimension standing for genes and the other one for samples.
+          Fields have to be separated by tabs or white spaces, but not by commas. Please upload the file:';
+    echo '<br> <input type="file" id="path"> <button type="button" id="fileSubmit" style="float: right;" onClick="onUploadClick();">Upload<button><br>';
     echo '<br>
           Does the file contain column names?<br>
                 <div class="iradio">
