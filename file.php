@@ -1,13 +1,14 @@
 <html>
 <head>
 <script>
-function onUploadClick() {
-    alert("hulala");
-    var file_data = document.getElementById('path').value;
-    //var file_data = $('#path').prop('files')[0];
+function onUploadClick(event) {
+    //var file_data = event.target.files;
+    //alert("hulala");
+    //var file_data = document.getElementById('path').value;
+    var file_data = $('#path').prop('files')[0];
     var form_data = new FormData();
     form_data.append('file', file_data);
-    alert(form_data);
+    //alert(form_data);
           $.ajax({
             type: 'post',
             url: 'uploadFile.php',
@@ -54,11 +55,7 @@ function onUploadClick() {
     //echo 'in = '.$in.' <br>';
     echo 'File should be of txt format and contain a data matrix with one dimension standing for genes and the other one for samples.
           Fields have to be separated by tabs or white spaces, but not by commas. Please upload the file:';
-    echo '<br> <div id="inpfile"><input type="file" name="path" id="path"> <br>
-                <button type=button id="uploadfile"  onclick="uploadFile()">Upload</button></div> <br>';
-    echo 'File should be of txt format and contain a data matrix with one dimension standing for genes and the other one for samples.
-          Fields have to be separated by tabs or white spaces, but not by commas. Please upload the file:';
-    echo '<br> <input type="file" id="path"> <button type="button" id="fileSubmit" style="float: right;" onClick="onUploadClick();">Upload<button><br>';
+    echo '<br> <input type="file" id="path"> <button type="button" id="fileSubmit" style="float: right;" onClick="onUploadClick();">Upload</button><br>';
     echo '<br>
           Does the file contain column names?<br>
                 <div class="iradio">
