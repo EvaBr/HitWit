@@ -37,7 +37,7 @@ if ($_POST['indata'] == "manual") {
     $sql = mysql_query("INSERT INTO data (genes, measurements, model, populations, sampleCells, email) VALUES ($genes_sql, '$measurements_sql', '$model_sql', $populations_sql, $cellspersample_sql, '$email_sql')");
     if (!$sql) die('Could not enter data. ' . mysql_error());
 
-    echo 'Data was successfully submitted for processing with R. Thank you for using our site.';
+    echo '<div style="margin-left: 2.4em; color: #555555; font-size: 13pt; font-weight: bolder;">Data was successfully submitted for processing with R. Thank you for using our site.</div>';
   } else {
     echo 'An error occured. Please check whether you entered the data correctly and resubmit the form.';
   };
@@ -53,7 +53,7 @@ if ($_POST['indata'] == "manual") {
     $sql = mysql_query("INSERT INTO data (file_ColNames, file_RowNames, file_ColSort, file_name, model, populations, sampleCells, email) VALUES ('$file_ColNames', '$file_RowNames', '$file_ColSort', '$file_name', '$model_sql',  $populations_sql, $cellspersample_sql, '$email_sql')");
     if (!$sql) die('Could not enter data. ' . mysql_error());
 
-    echo 'Data was successfully submitted for processing with R. Thank you for using our site.';
+    echo '<div style="margin-left: 2.4em; color: #555555; font-size: 13pt; font-weight: bolder;">Data was successfully submitted for processing with R. Thank you for using our site.</div>';
 }
 
 mysql_close($link); // Close the SQL connection.
