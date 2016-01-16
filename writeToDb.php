@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors', 'On');
-error_reporting(E_ALL | E_STRICT);
+//ini_set('display_errors', 'On');
+//error_reporting(E_ALL | E_STRICT);
 
 function checkStrings($string) {
   $explodeAndCheck = array_filter(explode(', ', $string), 'is_numeric'); // explode on ", " and only take the values which are numeric
@@ -37,7 +37,7 @@ if ($_POST['indata'] == "manual") {
     $sql = mysql_query("INSERT INTO data (genes, measurements, model, populations, sampleCells, email) VALUES ($genes_sql, '$measurements_sql', '$model_sql', $populations_sql, $cellspersample_sql, '$email_sql')");
     if (!$sql) die('Could not enter data. ' . mysql_error());
 
-    echo 'Data was successfully written to our database. Thank you for your contribution.';
+    echo 'Data was successfully submitted for processing with R. Thank you for using our site.';
   } else {
     echo 'An error occured. Please check whether you entered the data correctly and resubmit the form.';
   };
@@ -53,7 +53,7 @@ if ($_POST['indata'] == "manual") {
     $sql = mysql_query("INSERT INTO data (file_ColNames, file_RowNames, file_ColSort, file_name, model, populations, sampleCells, email) VALUES ('$file_ColNames', '$file_RowNames', '$file_ColSort', '$file_name', '$model_sql',  $populations_sql, $cellspersample_sql, '$email_sql')");
     if (!$sql) die('Could not enter data. ' . mysql_error());
 
-    echo 'Data was successfully written to our database. Thank you for your contribution.';
+    echo 'Data was successfully submitted for processing with R. Thank you for using our site.';
 }
 
 mysql_close($link); // Close the SQL connection.

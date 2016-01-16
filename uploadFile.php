@@ -1,5 +1,5 @@
 <?php
-
+//echo $_FILES['file']['name'];
 $upload_dir = "file_uploads/";
 
 $sourcePath = $_FILES['file']['tmp_name'];

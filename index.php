@@ -110,7 +110,7 @@ function checkFirst(kder){ //returns true, if some data is missing. in that case
                   if (result_ajax == 0){
                     alert("You did not follow the suggested pattern for measurements or you have entered a non-numeric character. Please correct that and resubmit.");
                     result = 0;
-                    $("#submit_return").html(result);
+                    //$("#submit_return").html(result);
                   }
               }
             });
@@ -188,7 +188,7 @@ function dataInput() {
 
           e.preventDefault();
 
-          if (!document.getElementById('cellspersample').value) {
+          if (!(document.getElementById('cellspersample').value && document.getElementById('email').value) ) {
             alert('Please answer all open questions before submitting.');
           } else {
 
@@ -209,8 +209,9 @@ function dataInput() {
             type: 'post',
             url: 'writeToDb.php',
             data: formData,
+            dataType: 'html',
             success: function (msg) {
-              alert('form was submitted');
+              //alert('form was submitted');
               $( "form" ).fadeOut( "slow", function(){
                 $("#submit_return").html(msg); // Show data from php file.
                 $("#helmholtz_logo").fadeIn();
@@ -241,7 +242,7 @@ This webtool allows you to generate synthetic data from our stochastic profiling
 as well as analyze your own data files. It serves as an interface to the R package
 <em><a class="urls" href="https://cran.r-project.org/web/packages/stochprofML/index.html">stochprofML</a></em>.
 
-For more details, please visit the <a class="urls" href="stochprofdata.html">Stochastic Profiling Webpage</a>.
+For more details, please visit the <a class="urls" href="stochprofdata.php">Stochastic Profiling Webpage</a>.
 For questions and suggestions, please contact <a class="urls" href="https://www.helmholtz-muenchen.de/icb/institute/staff/staff/ma/2448/index.html" >Christiane Fuchs.</a></p>
 <div name="hula" value="1" />
 <div class="wrapper">
@@ -330,7 +331,7 @@ For questions and suggestions, please contact <a class="urls" href="https://www.
   <p>
     Please enter the number of cells that entered each sample:
     <br> <input type="number" min="1" name="cellspersample" id="cellspersample"> <br><br>
-    Please enter your e-mail address:
+    Please enter your e-mail address, to which you would like the results to be sent:
     <br> <input type="email" id="email" name="email"><br><br>
     <input type="submit" name="main_submit" style="float: right;" value="Submit">
     <button type="button" id="prev4" style="float: right;"> Previous </button>

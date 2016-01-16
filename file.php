@@ -3,12 +3,12 @@
 <script>
 function onUploadClick(event) {
     //var file_data = event.target.files;
-    alert("hulala");
+    //alert("hulala");
     //var file_data = document.getElementById('path').value;
     var file_data = $('#path').prop('files')[0];
     var form_data = new FormData();
     form_data.append('file', file_data);
-    alert(form_data);
+    //alert(form_data);
           $.ajax({
             type: 'post',
             url: 'uploadFile.php',
@@ -63,8 +63,8 @@ function onUploadClick(event) {
     echo 'File should be of txt format and contain a data matrix with one dimension standing for genes and the other one for samples.
           Fields have to be separated by tabs or white spaces, but not by commas. Please upload the file:';
     echo '<br> <input type="file" id="path"> <button type="button" id="fileSubmit" style="float: center;" onClick="onUploadClick();">Upload</button>
-    <div id="success" style="display: none;"><img style="width: 32px" src="success.png"></div><br>';
-    echo '<br>
+    <div id="success" style="display: none; height: 0px"><img style="width: 30px; float: right; margin-right: 15em; margin-top: -2.3em;" src="success.png"></div>';
+    echo '<br><br>
           Does the file contain column names?<br>
                 <div class="iradio">
                   <input type="radio" name="colNam" id="colNamY" value="yes"><label for="colNamY"> Yes </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;

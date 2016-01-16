@@ -1,9 +1,9 @@
 <?php
 $servername = "localhost";
-$username = "hitwit";
+$username = "u333095501_hitwi";
 $password = "blabla";
 
-$database = "hitwit";
+$database = "u333095501_hitwi";
 
 $link = mysql_connect($servername, $username, $password);
 if (!$link) {
